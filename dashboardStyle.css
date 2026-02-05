@@ -1,0 +1,182 @@
+/* Globale stiler */
+body {
+    font-family: 'Sono', sans-serif;
+    background-color: #1a1e21;
+    color: #f5f6fa;
+    margin: 0;
+    padding: 0; /* Fjernet padding for å la menyen gå helt ut til kanten */
+}
+
+/* --- NY TOPP-MENY --- */
+.top-bar {
+    display: flex;
+    justify-content: space-between; /* Skyver innholdet til hver sin kant */
+    align-items: center;
+    background-color: #2c3e50; /* Mørkere bakgrunn for menyen */
+    padding: 15px 40px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+/* Venstre side: Ikon og tekst */
+.brand-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.pediatric-icon {
+    font-size: 1.8rem; /* Større ikon */
+}
+
+/* Høyre side: Menyvalg */
+.nav-links {
+    display: flex;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.menu-item {
+    background: transparent;
+    color: #ecf0f1;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    border: 1px solid transparent;
+}
+
+.menu-item:hover {
+    background: #E1B12C;
+    color: #2D3436;
+    transform: translateY(-2px);
+}
+
+/* --- HOVEDINNHOLD --- */
+
+.welcome-section {
+    text-align: center;
+    margin: 40px 0;
+}
+
+/* Grid Layout - Sentrert med max-width */
+#widgets-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    max-width: 900px; /* Smalere bredde siden vi bare har to kort */
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Card Design */
+.card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Vær-kort spesialfiks */
+.weather-card {
+    background: transparent !important;
+    box-shadow: none;
+    border: none;
+}
+
+.weather-card iframe {
+    display: block;
+    border-radius: 12px;
+    background: #222;
+}
+
+/* Nyhets-kort styling */
+.card-header {
+    padding: 15px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+}
+
+.dftb-theme .card-header { background: #4A90E2; }
+
+.post-container {
+    padding: 10px 0;
+    background: white;
+    color: #333;
+    flex-grow: 1;
+}
+
+.post-item {
+    padding: 12px 20px;
+    border-bottom: 1px solid #eee;
+    transition: background 0.2s;
+}
+
+.post-item:hover { background: #f8f9fa; }
+
+.post-title {
+    color: #2d3436;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.post-summary {
+    font-size: 12px;
+    color: #636e72;
+    margin: 0 0 5px 0;
+    line-height: 1.4;
+}
+
+.post-date {
+    font-size: 11px;
+    color: #b2bec3;
+}
+
+.card-footer {
+    padding: 12px;
+    text-align: center;
+    background: #f8f9fa;
+    border-top: 1px solid #eee;
+}
+
+.card-footer a {
+    font-size: 12px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #2d3436;
+}
+
+/* Logg ut knapp */
+#loggOut {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: #c0392b;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.loading, .error {
+    text-align: center;
+    padding: 20px;
+    color: #999;
+}

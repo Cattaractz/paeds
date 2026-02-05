@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulatorer - Barneavdelingen</title>
+    <link rel="stylesheet" href="./dashboardStyle.css">
+    <link rel="stylesheet" href="./kalkStyle.css">
+    <script src="./kalkScript.js" defer></script>
+    <style>
+        .back-btn { display: inline-block; margin-bottom: 10px; color: #e8f4ff; text-decoration: none; font-size: 0.9rem; background-color: #4CAF50; padding: 8px 12px; border-radius: 5px; }
+    </style>
+    
+
+</head>
+<body>
+
+    <nav class="top-bar">
+        <div class="brand-area">
+            <span class="pediatric-icon">🧮</span>
+            <span class="brand-text">Medisinsk Kalkulator</span>
+        </div>
+    </nav>
+    <a href="dashboard.html" class="back-btn">← Tilbake</a>
+    <header class="welcome-section">
+        <h1>Kalkulatorer</h1>
+        <p>Praktiske verktøy for klinisk bruk</p>
+    </header>
+
+
+    <div class="calculator-container">
+        
+        <div class="mode-selector">
+            <label for="calcType" style="display:block; margin-bottom:10px; color:#666;">Velg kalkulator:</label>
+            <select id="calcType" onchange="switchCalculator()">
+                <option value="fluid">💧 Væskebehov</option>
+                <option value="dosage">💊 Dosering Kalkulator</option>
+                <option value="diabetes">🩸 Nyoppdaget diabetes</option>
+                <option value="DKA">🩸 Diabetisk Ketoacidose</option>
+                <option value="premPN">👶 Prematur PN</option>
+                <!--<option value="terminPN">👶 Termin PN</option>-->
+                <option value="bmi">⚖️ BMI Kalkulator</option>
+                
+            </select>
+        </div>
+
+        <hr style="border: 0; border-top: 1px solid #eee; margin-bottom: 20px;">
+
+        <div id="section-fluid" class="calc-section active">
+            <h2>Væskebehov</h2>
+            <p>Basert på 4-2-1 regelen</p>
+            
+            <div class="input-group">
+                <input type="number" id="weightInputFluid" placeholder="Vekt (kg)" step="0.1">
+            </div>
+
+            <button class="calc-btn" onclick="calculateFluid()">Beregn</button>
+
+            <div id="results-fluid" class="results-area">
+                <div class="result-card">
+                    <span class="result-title">Væskebehov (4-2-1)</span>
+                    <span class="result-value" id="fluidValue">0 ml/døgn</span>
+                    <small id="fluidRate" style="color:#888;">(0 ml/time)</small>
+                    <br><br>
+                    <span class="result-title">Væskebehov ved sykdom</span>
+                    <span class="result-value" id="sickFluidValue">0 ml/døgn</span>
+                    <small id="fluidSickRate" style="color:#888;">(0 ml/time)</small>
+                </div>
+            </div>
+        </div>
+
+        <div id="section-bmi" class="calc-section">
+            <h2>BMI Kalkulator</h2>
+            <p>Body Mass Index</p>
+            
+            <div class="input-group">
+                <input type="number" id="bmiWeight" placeholder="Vekt (kg)" step="0.1">
+                <input type="number" id="bmiHeight" placeholder="Høyde (cm)" step="1">
+            </div>
+
+            <button class="calc-btn" onclick="calculateBMI()">Beregn BMI</button>
+
+            <div id="results-bmi" class="results-area">
+                <div class="result-card" style="border-left-color: #27ae60;">
+                    <span class="result-title">Din BMI</span>
+                    <span class="result-value" id="bmiResult">0.0</span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div id="section-dosage" class="calc-section">
+                <h2>Dosering Kalkulator</h2>
+                <p>Beregn dosering basert på vekt</p>
+                
+                <div class="input-group">
+                    <input type="number" id="weightInputDose" placeholder="Vekt (kg)" step="0.1">
+                </div>
+
+                <button class="calc-btn" onclick="calculateDosage()">Beregn Dosering</button>
+
+                <div id="results-dosage" class="results-area">
+                    <!-- Resultater for dosering vil vises her -->
+                     <div class="result-card" style="border-left-color: #e74c3c;">
+                    <span class="result-title">Paracetamol (15mg/kg)</span>
+                    <span class="result-value" id="paraValue">0 mg</span>
+                </div>
+                
+                <div class="result-card" style="border-left-color: #f1c40f;">
+                    <span class="result-title">Ibuprofen (10mg/kg)</span>
+                    <span class="result-value" id="ibuxValue">0 mg</span>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div id="section-diabetes" class="calc-section">
+            <h2>Diabetes Kalkulator</h2>
+            <p>Beregn oppstart insulin og korreksjonsfaktorer</p>
+            <p>Venligst velg hvor mange E/kg/døgn du ønsker å bruke og før inn barnets vekt</p>
+            
+            <div class="input-group">
+                <input type="number" id="enheter" placeholder="0.7 - 2 E/kg/d" step="0.1">
+                <input type="number" id="weightInputDia" placeholder="Vekt (kg)" step="0.1">
+                
+            </div>
+
+            <button class="calc-btn" onclick="calculateInsulin()">Beregn Insulin Dose</button>
+
+            <div id="results-insulin" class="results-area"> 
+            <div class="result-card" style="border-left-color: #8e44ad;">
+                <span class="result-title">Døgndose insulin</span>
+                <span class="result-value" id="insulinResult">0 enheter</span>
+                <span class="result-title">Startdose</span>
+                <span class="result-value" id="startDose">0 enheter</span>
+                <span class="result-title">Karbohydrat faktor</span>
+                <span class="result-value" id="karbResult">0 g/enhet</span>
+                <span class="result-title">Insulinfølsomhet</span>
+                <span class="result-value" id="sensitivityResult">0 mmol/L per enhet</span>
+            </div>
+            </div>
+        </div>
+        <div id="section-DKA" class="calc-section">
+            <h2>Diabetisk Ketoacidose Kalkulator</h2>
+            <p>Beregn væskebehov og insulinbehov ved DKA</p>
+            
+            <div class="input-group">
+                <input type="number" id="weightInputDKA" placeholder="Vekt (kg)" step="0.1">
+                <input type="number" id="antattDeficit" placeholder="Væskedeficit(%)" step="0.1">
+            </div>
+
+            <button class="calc-btn" onclick="calculateDKA()">Beregn DKA Behov</button>
+
+            <div id="results-DKA" class="results-area">
+                <div class="result-card" style="border-left-color: #d35400;">
+                    <span class="result-title">Initial rehydrering</span>
+                    <span class="result-value" id="initialFluid">0 ml over 20-30 min</span>
+                    <span class="result-title">Antatt deficit</span>
+                    <span class="result-value" id="deficitValue">0 ml</span>
+                    <span class="result-title">Vedlikeholdsbehov</span>
+                    <span class="result-value" id="maintenanceValue">0 ml</span>
+                    <span class="result-title">Væskebehov etter initial rehydrering</span>
+                    <span class="result-value" id="væskeEtterInitial">0 ml</span>
+                    <small id="dkaFluidRate" style="color:#888;">(0 ml/time)</small>
+                </div>
+            </div>
+
+        </div>
+        <div>
+            <div id="section-premPN" class="calc-section">
+                <h3>Beregn Parenteral næring</h3>
+                <p>Vekt</p>
+                <div class="input-group">
+                    <input type="number" id="weightInputPPn" placeholder="Vekt (kg)" step="0.1">
+                </div>
+                <p>Væskebehov</p>
+                <div class="input-group">
+                    <input type="number" id="væskebehov" placeholder="Væskebehov (ml/kg/d)" step="0.1">
+                </div>
+                <p>Ønsket karbohydrat(g/kg/d)</p>
+                <div class="input-group">
+                    <input type="number" id="Karbohydrat" placeholder="Ønsket karbohydrat (g/kg/d)" step="0.1">
+                </div>
+                <p>Enteral ernæring (ml/d)</p>
+                
+                <div class="input-group">
+                    <input type="number" id="enteralt" placeholder="Enteral ernæring (ml/d)" step="0.1">
+                </div>
+                <p>Andre væsker (ml/d)</p>
+                <div class="input-group">
+                    <input type="number" id="andreVæsker" placeholder="Andre væsker (ml/d)" step="0.1">
+                </div>
+            
+
+                <button class="calc-btn" onclick="calculatePremPN()">Beregn PN</button>
+            </div>
+
+                <div id="results-premPN" class="results-area">
+    <div class="pn-result-grid">
+        <div class="pn-card main-pn">
+            <span class="pn-label">Total mengde PN</span>
+            <span class="pn-value" id="pnAmount">0 ml/d</span>
+            <span class="pn-sub" id="pnRate">0 ml/t</span>
+        </div>
+
+        <div class="pn-card glucose-addon">
+            <span class="pn-label">Glukose m/heparin</span>
+            <span class="pn-value" id="glucoseResult">0 ml/d</span>
+            <span class="pn-sub" id="glucoseRate">0 ml/t</span>
+            <div class="pn-badge" id="glucosePercent">0 % glukose</div>
+        </div>
+
+        <div class="pn-details">
+            <div class="detail-item kh">
+                <span>Karbohydrat i PN</span>
+                <strong id="khInPn">0 g/kg/d</strong>
+            </div>
+            <div class="detail-item protein">
+                <span>Aminosyrer i PN</span>
+                <strong id="proteinInPn">0 g/kg/d</strong>
+            </div>
+            <div class="detail-item fat">
+                <span>Fett i PN</span>
+                <strong id="fatInPn">0 g/kg/d</strong>
+            </div>
+            <div class="detail-item kh-glucose">
+                <span>Kh i glukose</span>
+                <strong id="gGlucoseInGlucose">0 g/kg/d</strong>
+            </div>
+            <div class="detail-item kh-total">
+                <span>Totalt KH (inkl. glukose)</span>
+                <strong id="gGlucoseInTotal">0 g/kg/d</strong>
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+        <br>
+        <a href="dashboard.html" class="back-btn">← Tilbake til Dashboard</a>
+    </div>
+    </div>
+    <h3 style="text-align:center; color:#aaa; margin-top:40px;">&copy; 2026 Academic Inquiries</h3>
+    <h5 style="text-align:center; color:#e4dddd; font-weight: lighter; margin-top:10px;">Denne kalkulatoren er ment som et supplement, skaperen av denne kalkulatoren tar ikke ansvar for eventuelle feil eller skader som følge av bruk.</h5>
+        
+    
+
+
+</body>
+</html>

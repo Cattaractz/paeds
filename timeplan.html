@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="timeplan.css"> 
+    <script>
+        // Keep only the login check here
+        if (sessionStorage.getItem('isLoggedIn') !== 'true') {
+            window.location.href = 'index.html';
+        }
+    </script>
+    <style>
+        #pic {
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+    
+        .dropdown {
+            position: relative;
+            display: block;
+            margin-left: 1px;
+        }
+    </style>
+</head>
+<body> <div class="dropdown">
+  <button class="dropbtn">Uke</button>
+  <div class="dropdown-content">
+    <a href="#" onclick="showPicture('pictures/uke4.jpg')">Uke 4</a>
+    <a href="#" onclick="showPicture('pictures/uke5.jpg')">Uke 5</a>
+    <a href="#" onclick="showPicture('pictures/uke6.jpg')">Uke 6</a>
+    <a href="#" onclick="showPicture('pictures/uke7.jpg')">Uke 7</a>
+    <a href="#" onclick="showPicture('pictures/uke8.jpg')">Uke 8</a>
+    <a href="#" onclick="showPicture('pictures/uke9.jpg')">Uke 9</a>
+    <a href="#" onclick="showPicture('pictures/uke10.jpg')">Uke 10</a>
+    <a href="#" onclick="showPicture('pictures/uke11.jpg')">Uke 11</a>
+    <a href="#" onclick="showPicture('pictures/uke12.jpg')">Uke 12</a>
+    <a href="#" onclick="showPicture('pictures/uke13.jpg')">Uke 13</a>
+  </div>
+</div>
+    
+<button class="nav-btn prev" onclick="changePicture(-1)">&#10094;</button>
+<button class="nav-btn next" onclick="changePicture(1)">&#10095;</button>
+
+<div id="pic">
+    <img id="displayedImage" 
+         src="" 
+         alt="Velg en uke" 
+         onclick="toggleFullscreen()" 
+         style="display: none;"> </div>
+
+<button id="back-btn" onclick="backFunction()">← Tilbake</button>
+
+<button id="logOutBtn" onclick="logoutFunction()">Log ut</button>
+
+    <script src="timeplan.js"></script>
+</body>
+</html>
