@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Barneavdelingen</title>
+    <link rel="stylesheet" href="./dashboardStyle.css">
+    <script>
+        if (sessionStorage.getItem('isLoggedIn') !== 'true') {
+            window.location.href = 'index.html';
+        }
+    </script>
+    <script src="./dashboardJS.js" defer></script>
+</head>
+<body id="dashboard">
+
+    <nav class="top-bar">
+        <div class="brand-area">
+            <span class="pediatric-icon">🧸</span>
+            <span class="brand-text">Barneavdelingen</span>
+        </div>
+        
+        <ul class="nav-links">
+            <!--<li class="menu-item" id="timeplan">Timeplan</li> -->
+            <!-- <li class="menu-item" id="kunnskapskilden">Kunnskapskilden</li> -->
+             <li class="menu-item" id="bilirubin">Bilirubinkalkulator</li>
+            <li class="menu-item" id="kalkulatorer">Kalkulatorer</li>
+            <li class="menu-item" id="akuttPed">Akutt pediatri</li>
+            <!-- <li class="menu-item" id="beskjeder">Beskjeder</li> -->
+        </ul>
+    </nav>
+
+    <header class="welcome-section">
+        <h1>Velkommen på vakt!</h1>
+        <p>Oversikt og verktøy</p>
+    </header>
+
+    <main id="widgets-container">
+        <div class="card weather-card">
+            <iframe src="https://www.yr.no/nb/innhold/1-211102/card.html?mode=dark" 
+                    frameborder="0" 
+                    width="100%" 
+                    height="363" 
+                    style="vertical-align: bottom;"></iframe>
+        </div>
+
+        <div class="card news-card dftb-theme">
+            <div class="card-header">
+                <span class="icon">🫧</span> Latest from DFTB
+            </div>
+            <div id="dftb-posts" class="post-container">
+                <p class="loading">Henter DFTB...</p>
+            </div>
+            <div class="card-footer">
+                <a href="https://dontforgetthebubbles.com/" target="_blank">Besøk DFTB.com</a>
+            </div>
+        </div>
+    </main>
+
+    <button id="loggOut" onclick="logout()">Logg ut</button>
+
+    <script>
+        function logout() {
+            sessionStorage.removeItem('isLoggedIn');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

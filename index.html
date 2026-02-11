@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Login page</title>
+  <link rel="stylesheet" href="./style.css">
+  <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+  <script src="./script.js" defer></script>
+
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">
+      <i class='bx  bx-face-child'  ></i> 
+    </div>
+    <h2>Barneavdelingen</h2>
+
+    <nav class="top-bar">
+        <ul class="nav-links">
+            <!-- <li class="menu-item" id="kunnskapskilden">Kunnskapskilden</li> -->
+            <li class="menu-item" id="kalkulatorer">Kalkulatorer</li>
+            <li class="menu-item" id="bilirubin">Bilirubinkalkulator</li>
+            <li class="menu-item" id="akuttPed">Akutt pediatri</li>
+            <!-- <li class="menu-item" id="beskjeder">Beskjeder</li> -->
+        </ul>
+    </nav>
+    
+  </header>
+
+  
+    
+  <div class="Login">
+  <form id="loginForm">
+    
+    <div class="inputBox">
+      
+      <input class="txtfield" type="text" id="username" placeholder="Brukernavn" required><br><br>
+      <i class='bx  bx-user'  ></i> 
+      
+    </div>
+    <div class="inputBox">
+       
+      <input class="txtfield" type="password" id="password" placeholder="Passord"><br><br>
+      <i class='bx  bx-lock'  ></i>
+      
+    </div>
+    <div>
+      <!-- <input type="submit" value="Login"> -->
+       <button type="submit" class="btn">Logg inn</button>
+    </div>
+  </form>
+</div>
+<script src="index.js"></script>
+
+</body>
+
+</html>
